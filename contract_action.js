@@ -14,7 +14,7 @@ async function main() {
 
     const counterContract = new ethers.Contract(test_contract.address, counterAbi, signer)
 
-    const tx = await counterContract.increment();
+    const tx = await counterContract.setCount(300);
     await tx.wait();
 
     const currentCount = await counterContract.getCount()
