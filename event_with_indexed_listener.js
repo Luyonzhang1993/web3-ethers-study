@@ -1,12 +1,18 @@
+const dotenv = require('dotenv')
+dotenv.config()
 const ethers = require('ethers')
 const { chain_info, test_contract } = require('./ganache_info')
 const { getAccounts } = require('./accounts')
 
-const accounts = getAccounts("vintage spawn parade become puzzle tortoise zebra sleep century bird popular certain")
+const mnemonic = process.env.mnemonic
+const accounts = getAccounts(mnemonic)
+
 
 async function main() {
     const rpcUrl = chain_info.rpcUrl
     const provider = new ethers.JsonRpcProvider(rpcUrl)
+
+    provider.getLogs()
 
     const abiCoder = ethers.AbiCoder.defaultAbiCoder()
 
