@@ -9,14 +9,9 @@ async function main() {
     }
 
     const wallet = new ethers.Wallet('0xac97167ffe59cad87c1fdc35a3b1295e99c584d8c0cefc29044e70bdc10e9f0d').connect(provider);
-
     const transactionLike = await wallet.populateTransaction(tx);
-    const gasInfo = await provider.estimateGas(transactionLike)
-    console.log(gasInfo);
-    const txRes = await provider.broadcastTransaction(await wallet.signTransaction(transactionLike));
-    console.log(txRes);
-    const receipt = await txRes.wait(2);
-    console.log({receipt});
+    const data = await wallet.sendTransaction(transactionLike);
+    console.log({ data });
 
 }
 
